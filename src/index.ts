@@ -1,5 +1,5 @@
 import express from "express";
-import { middlewareLogResponse } from "./api/middleware.js";
+import { middlewareLogResponse, errorMiddleWare } from "./api/middleware.js";
 import { handlerCreateNote, handlerGetNotes } from "./api/notes.js";
 import { config } from "./config.js";
 
@@ -15,6 +15,8 @@ app.get("/api/notes", (req, res, next) => {
 app.post("/api/notes", (req, res, next) => {
     Promise.resolve(handlerCreateNote(req, res)).catch(next);
 });
+
+app.use(errorMiddleWare);
 
 app.listen(config.api.port, () => {
   console.log(`Server is running at http://localhost:${config.api.port}`);

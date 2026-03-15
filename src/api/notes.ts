@@ -3,21 +3,51 @@ import type { Request, Response } from "express";
 import { BadRequestError } from "./errors.js";
 import { respondWithJSON } from "./json.js";
 
-let notes: string[] = [];
+type Note = {
+    id: number,
+    title: string,
+    author: string,
+    note: string,
+    createdAt: string
+}
+
+let notes: Note[] = [];
+let nextId: number = 1;
 
 export async function handlerGetNotes(_: Request, res: Response) {
-    res.send(notes.toString());
+    respondWithJSON(res, 200, notes);
 };
 
 export async function handlerCreateNote(req: Request, res: Response) {
     type parameters = {
-        note: string;
+        title: string,
+        author: string,
+        note: string
     };
     const params: parameters = req.body;
 
-    if (!params.note) {
-        throw new BadRequestError(`Create Note missing note`);
+    if (!params.title) {
+        throw new BadRequestError("Create Note missing title");
     }
-    notes.push(params.note);
-    respondWithJSON(res, 201, {"note" : params.note});
+
+    if (!params.author) {
+        throw new BadRequestError("Create Note missing author");
+    }
+
+    if (!params.note) {
+        throw new BadRequestError("Create Note missing note");
+    }
+
+    const newNote: Note = {
+        id: nextId,
+        title: params.title,
+        author: params.author,
+        note: params.note,
+        createdAt: new Date().toISOString()
+    };
+
+    nextId++;
+
+    notes.push(newNote);
+    respondWithJSON(res, 201, newNote);
 };
