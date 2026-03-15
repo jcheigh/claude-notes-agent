@@ -1,7 +1,6 @@
 const form = document.getElementById("note-form");
 const titleInput = document.getElementById("title-input")
-const authorInput = document.getElementById("author-input")
-const noteInput = document.getElementById("note-input")
+const bodyInput = document.getElementById("body-input")
 
 const notesList = document.getElementById("notes-list")
 const errorMessage = document.getElementById("error-message")
@@ -17,7 +16,7 @@ function renderNotes(notes) {
 
     for (const note of notes) {
         const li = document.createElement("li")
-        li.textContent = `${note.title} — ${note.author} - ${note.note}`
+        li.textContent = `${note.title}: ${note.body}`
         notesList.appendChild(li)
     }
 }
@@ -26,8 +25,7 @@ async function handleSubmit(event) {
   event.preventDefault()
 
   const title = titleInput.value
-  const author = authorInput.value
-  const note = noteInput.value
+  const body = bodyInput.value
 
   const response = await fetch("/api/notes", {
     method: "POST",
@@ -36,8 +34,7 @@ async function handleSubmit(event) {
     },
     body: JSON.stringify({
       title,
-      author,
-      note
+      body
     })
   })
 

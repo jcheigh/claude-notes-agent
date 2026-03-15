@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
     "start": "node dist/server.js",
-    "dev": "npx tsx watch src/server.ts"
+    "dev": "npx tsx watch src/server.ts",
+    "generate": "drizzle-kit generate",
+    "migrate": "drizzle-kit migrate"
   },
   "keywords": [],
   "author": "",
@@ -17,11 +19,14 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^25.5.0",
+    "drizzle-kit": "^0.31.9",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
     "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "drizzle-orm": "^0.45.1",
+    "express": "^5.2.1",
+    "postgres": "^3.4.8"
   }
 }
