@@ -1,10 +1,16 @@
 import express from "express";
+import cors from "cors";
+
 import { middlewareLogResponse, errorMiddleWare } from "./api/middleware.js";
 import { handlerCreateNote, handlerGetNotes } from "./api/notes.js";
 import { config } from "./config.js";
 
 const app = express();
 
+// for later
+app.use(cors({
+    origin: "http://localhost:5173"
+}));
 app.use(middlewareLogResponse);
 app.use(express.json());
 
