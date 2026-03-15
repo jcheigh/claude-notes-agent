@@ -1,3 +1,36 @@
-<p>
-    Hello, World!
-</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Notes App</title>
+</head>
+
+<body>
+  <h1>Claude Notes</h1>
+
+  <h2>Create Note</h2>
+  <form id="note-form">
+    <div>
+      <label>Title</label>
+      <input id="title-input" type="text" />
+    </div>
+    <div>
+      <label>Author</label>
+      <input id="author-input" type="text" />
+    </div>
+    <div>
+      <label>Note</label>
+      <textarea id="note-input"></textarea>
+    </div>
+    <button type="submit">Create Note</button>
+  </form>
+
+  <h2>Notes</h2>
+
+  <ul id="notes-list"></ul>
+
+  <p id="error-message"></p>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
