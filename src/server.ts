@@ -14,7 +14,7 @@ await migrate(drizzle(migrationClient), config.db.migrationConfig);
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:5432"
+    origin: "http://localhost:5173"
 }))
 app.use(middlewareLogResponse);
 app.use(express.json());

@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 
 import { BadRequestError } from "./errors.js";
 import { respondWithJSON } from "./json.js";
-import { createNote, getNotes } from "src/db/queries/notes.js";
+import { createNote, getNotes } from "./../db/queries/notes.js";
 
 export async function handlerGetNotes(_: Request, res: Response) {
     const notes = await getNotes();
