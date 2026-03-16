@@ -28,8 +28,15 @@ SELECT version();
 
 2. Generate migration + run server
 ```bash
+cd claude-notes-agent
 npm run generate
 npm run dev
 ```
 
-3. Navigate to http://localhost:8080/app
+3. Run client
+```bash
+cd client
+npm run dev
+```
+
+3. Navigate to http://localhost:5173
