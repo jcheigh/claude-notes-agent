@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
+
+import NotesList from "./components/NotesList";
+import CreateNoteForm from "./components/CreateNoteForm";
+import type { Note, NoteInput } from "./types";
 import "./App.css";
 
-type Note = {
-  title: string;
-  createdAt: string;
-  body: string;
-}
 
 export default function App() {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -20,15 +19,29 @@ export default function App() {
     loadNotes();
   }, []);
 
+  async function createNote(input: NoteInput) {
+    const response = await fetch("/api/notes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(input)
+    });
+
+    if (!response.ok) {
+      const err = await response.json();
+      throw new Error(err);
+    } else {
+      const newNote = await response.json();
+      setNotes((currNotes) => [newNote, ...currNotes]);
+    }
+  }
+
   return (
     <div>
-      {notes.map((note) => (
-        <div key={`${note.title}-${note.createdAt}`}>
-          <h3>{note.title}</h3>
-          <div>{note.createdAt}</div>
-          <p>{note.body}</p>
-        </div>
-      ))}
+      <h1>Da Notes</h1>
+      <CreateNoteForm onCreateNote={createNote} />
+      <NotesList notes={notes} />
     </div>
   );
 }

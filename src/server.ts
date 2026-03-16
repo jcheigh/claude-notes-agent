@@ -19,7 +19,6 @@ app.use(cors({
 app.use(middlewareLogResponse);
 app.use(express.json());
 
-app.use("/app", express.static("./src/app"));
 app.get("/api/notes", (req, res, next) => {
     Promise.resolve(handlerGetNotes(req, res)).catch(next);
 });
