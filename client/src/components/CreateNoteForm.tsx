@@ -1,43 +1,46 @@
 import { useState } from "react";
-
 import type { CreateNoteFormProps } from "../types";
 
 export default function CreateNoteForm({ onCreateNote }: CreateNoteFormProps) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!title.trim()) return;
 
-    await onCreateNote({
-      title,
-      body,
-    });
-
-    setTitle("");
-    setBody("");
+    setLoading(true);
+    try {
+      await onCreateNote({ title, body });
+      setTitle("");
+      setBody("");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="title">Title</label>
-        <input
-          id="title"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="body">Body</label>
-        <textarea
-          id="body"
-          value={body}
-          onChange={(event) => setBody(event.target.value)}
-        />
-      </div>
-
-      <button type="submit">Create Note</button>
+      <input
+        className="create-note-input"
+        placeholder="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <textarea
+        className="create-note-textarea"
+        placeholder="Body (optional)"
+        value={body}
+        onChange={(e) => setBody(e.target.value)}
+      />
+      <button
+        className="btn-create"
+        type="submit"
+        disabled={loading || !title.trim()}
+      >
+        {loading ? "Creating…" : "Create Note"}
+      </button>
     </form>
   );
-};
+}

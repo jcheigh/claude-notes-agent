@@ -8,13 +8,14 @@ Quick project to understand the basics of the claude agent SDK.
 - [x] Setup drizzle/postgres for DB
 - [x] Replace raw html with react/vite
 - [x] Setup components/state (notes list, note, create note form, chat interface)
-- [ ] Have claude code rip a UI
+- [x] Have claude code rip a UI
 - [ ] Add WebSocket (ws) to express server 
 - [ ] Add basic Claude Agent SDK
 - [ ] Add basic MCP tools for creating/getting notes
 
 ### Current Status
 
+![alt text](<Screenshot 2026-03-17 at 8.48.25 AM.png>)
 
 ### Instructions
 

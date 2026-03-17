@@ -1,9 +1,12 @@
-import type { ChatMessage, ChatMessageProps } from "../types";
+import type { ChatMessageProps } from "../types";
 
 export default function ChatMessage({ message }: ChatMessageProps) {
   return (
-    <div>
-      <strong>{message.role}:</strong> {message.content}
+    <div className={`chat-message ${message.role}`}>
+      <div className="chat-bubble">
+        {message.content}
+        {message.streaming && <span className="streaming-cursor" />}
+      </div>
     </div>
   );
 }
