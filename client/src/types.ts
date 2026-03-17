@@ -18,4 +18,30 @@ export type CreateNoteFormProps = {
 
 export type NotesListProps = {
     notes: Note[];
+    onSelectNote: (note: Note) => void;
+};
+
+export type NoteViewProps = {
+    note?: Note;
+};
+
+export type ChatMessage = {
+    id: string;
+    role: "user" | "assistant" | "system";
+    content: string;
+};
+
+export type ChatMessageProps = {
+    message: ChatMessage;
+};
+
+export type ChatMessageListProps = {
+    messages: ChatMessage[];
+}
+
+export type ConnectionStatus = "connecting" | "open" | "closed";
+
+export type ChatInputProps = {
+    onSendMessage: (text: string) => void;
+    connectionStatus: ConnectionStatus;
 };

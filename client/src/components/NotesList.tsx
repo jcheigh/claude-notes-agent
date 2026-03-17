@@ -1,15 +1,15 @@
 import type { NotesListProps } from "../types";
 
-export default function NotesList({ notes }: NotesListProps) {
+export default function NotesList({ notes, onSelectNote }: NotesListProps) {
   return (
-    <div>
+    <ul>
       {notes.map((note) => (
-        <div key={`${note.title}-${note.createdAt}`}>
-          <h3>{note.title}</h3>
-          <div>{note.createdAt}</div>
-          <p>{note.body}</p>
-        </div>
+        <li key={`${note.title}-${note.createdAt}`}>
+          <button onClick={() => onSelectNote(note)}>
+            {note.title}
+          </button>
+        </li>
       ))}
-    </div>
+    </ul>
   );
-};
+}
